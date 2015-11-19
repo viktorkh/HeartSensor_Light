@@ -24,6 +24,9 @@ public class MainActivity extends ActionBarActivity
     public EditText txtDuration;
     public EditText txtMaxRate;
 
+    SimpleWakefulReceiver _receiver = new SimpleWakefulReceiver();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,10 +87,19 @@ public class MainActivity extends ActionBarActivity
         String maxrate = txtMaxRate.getText().toString();
 
 
+        _receiver.setAlarm(this);
 
-        new SendToDataLayerThread("/message_path",duration,maxrate ).start();
+    //    new SendToDataLayerThread("/message_path",duration,maxrate ).start();
 
 
+
+
+    }
+
+    public void btnCancel_Click(View target) {
+
+
+        _receiver.cancelAlarm(this);
     }
 
 

@@ -45,11 +45,21 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="Start Alarm"
         android:id="@+id/button"
         android:layout_below="@+id/editText_maxrate"
         android:layout_alignStart="@+id/editText_maxrate"
         android:onClick="btnSave_Click"
         android:layout_marginTop="84dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel Sensor"
+        android:id="@+id/btnCancel"
+        android:onClick="btnCancel_Click"
+        android:layout_alignTop="@+id/button"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="29dp" />
 
 </RelativeLayout>

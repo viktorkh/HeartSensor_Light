@@ -24,8 +24,6 @@ public class WearService extends WearableListenerService implements SensorEventL
 
 
     private GoogleApiClient mGoogleApiClient;
-    private static final String COUNT_KEY = "com.example.key.count";
-    private int count = 0;
     private String mNodeId;
     private static final String TAG = "WearService";
     public static final String CONFIG_START = "config/start";
@@ -48,16 +46,16 @@ public class WearService extends WearableListenerService implements SensorEventL
 
 
         if (messageEvent.getPath().equals("/control")) {
+
             final String message = new String(messageEvent.getData());
-            Log.v("myTag", "Message path received on watch is: " + messageEvent.getPath());
-            Log.v("myTag", "Message received on watch is: " + message);
 
 
-            //   int heartRate =GetSensorData();
+
         } else if (messageEvent.getPath().equals("/heartrate")) {
 
 
             GetSensorData();
+
         } else {
             super.onMessageReceived(messageEvent);
         }
@@ -68,6 +66,7 @@ public class WearService extends WearableListenerService implements SensorEventL
         if (mSensorManager == null) {
             mSensorManager = ((SensorManager) getSystemService(SENSOR_SERVICE));
         }
+
 
         if (mHeartRateSensor == null) {
             mHeartRateSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
