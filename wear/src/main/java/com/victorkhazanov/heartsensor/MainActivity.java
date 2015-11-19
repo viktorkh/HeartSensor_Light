@@ -22,11 +22,15 @@ public class MainActivity extends Activity {
 
      //   _receiver.setAlarm(this);
 
+        finish();
+
     }
 
     public void onNoBtn(View view) {
 
 
+
+        finish();
 //        _receiver.cancelAlarm(this);
     }
 

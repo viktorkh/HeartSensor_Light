@@ -92,7 +92,7 @@ public class MainActivity extends ActionBarActivity
     //    new SendToDataLayerThread("/message_path",duration,maxrate ).start();
 
 
-
+        finish();
 
     }
 
@@ -100,6 +100,7 @@ public class MainActivity extends ActionBarActivity
 
 
         _receiver.cancelAlarm(this);
+        finish();
     }
 
 
