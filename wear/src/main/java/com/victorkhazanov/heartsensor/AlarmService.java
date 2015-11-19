@@ -49,7 +49,7 @@ public class AlarmService extends IntentService implements SensorService.OnChang
                 public void onServiceConnected(ComponentName componentName, IBinder binder) {
                     // Log.d(LOG_TAG, "connected to service.");
                     // set our change listener to get change events
-                    ((SensorService.SensorServiceBinder)binder).setChangeListener(AlarmService.this);
+                    ((SensorService.SensorServiceBinder) binder).setChangeListener(AlarmService.this);
                 }
 
                 @Override

@@ -1,6 +1,6 @@
 package com.victorkhazanov.heartsensor;
 
-import android.app.Service;
+import android.app.IntentService;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -19,7 +19,7 @@ import com.google.android.gms.wearable.Wearable;
 
 import java.util.List;
 
-public class SensorService extends Service
+public class SensorService extends IntentService
 
         implements SensorEventListener {
 
@@ -35,6 +35,10 @@ public class SensorService extends Service
         void onValueChanged(int newValue);
     }
 
+
+    public SensorService() {
+        super("SensorService");
+    }
     /**
      * Binder for this service. The binding activity passes a listener we send the heartbeat to.
      */
@@ -51,6 +55,15 @@ public class SensorService extends Service
     @Override
     public IBinder onBind(Intent intent) {
         return binder;
+    }
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
+
+
+
+        SimpleWakefulReceiver.completeWakefulIntent(intent);
+
     }
 
     @Override

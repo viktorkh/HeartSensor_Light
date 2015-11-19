@@ -25,7 +25,8 @@ public class HeartWearListenerService extends WearableListenerService {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
 // Vibrate for 400 milliseconds
-        v.vibrate(400);
+        v.vibrate(4000);
+
 
         if (message[0].equals(SERVICE_CALLED_WEAR)) {
 

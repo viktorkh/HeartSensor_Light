@@ -2,7 +2,6 @@ package com.victorkhazanov.heartsensor;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -27,7 +26,10 @@ public class SimpleWakefulReceiver extends WakefulBroadcastReceiver {
         // This is the Intent to deliver to our service.
         Intent service = new Intent(context, AlarmService.class);
 
-        startWakefulService(context, service);
+        Intent intentSensor = new Intent(context,SensorService.class);
+
+      //  startWakefulService(context, service);
+        startWakefulService(context, intentSensor);
     }
 
     public void setAlarm(Context context) {
