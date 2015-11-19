@@ -16,19 +16,18 @@ public class SimpleWakefulReceiver extends WakefulBroadcastReceiver {
 
     private PendingIntent alarmIntent;
 
-    private static final long REPEAT_TIME = 1000 * 30;
+    private static final long REPEAT_TIME = 1000 * 300;
 
     public SimpleWakefulReceiver() {
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // This is the Intent to deliver to our service.
-        Intent service = new Intent(context, AlarmService.class);
 
-        Intent intentSensor = new Intent(context,SensorService.class);
+        Intent intentSensor = new Intent(context, HandlerService.class);
 
-      //  startWakefulService(context, service);
+
+        //  startWakefulService(context, service);
         startWakefulService(context, intentSensor);
     }
 
