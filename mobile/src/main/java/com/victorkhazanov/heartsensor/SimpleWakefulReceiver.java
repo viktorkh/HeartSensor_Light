@@ -16,7 +16,7 @@ public class SimpleWakefulReceiver extends WakefulBroadcastReceiver {
 
     private PendingIntent alarmIntent;
 
-    private static final long REPEAT_TIME = 1000 * 300;
+    private static final long REPEAT_TIME = 1000 * 60;
 
     public SimpleWakefulReceiver() {
     }
@@ -31,7 +31,7 @@ public class SimpleWakefulReceiver extends WakefulBroadcastReceiver {
         startWakefulService(context, intentSensor);
     }
 
-    public void setAlarm(Context context) {
+    public void setAlarm(Context context,int repeatTime) {
 
         alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, SimpleWakefulReceiver.class);
@@ -42,7 +42,7 @@ public class SimpleWakefulReceiver extends WakefulBroadcastReceiver {
         cal.add(Calendar.SECOND, 30);
 
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-                cal.getTimeInMillis(), REPEAT_TIME, alarmIntent);
+                cal.getTimeInMillis(), REPEAT_TIME*repeatTime, alarmIntent);
 
 
         ComponentName receiver = new ComponentName(context, SimpleWakefulReceiver.class);

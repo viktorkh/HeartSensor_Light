@@ -2,12 +2,10 @@ package com.victorkhazanov.heartsensor;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -36,7 +34,7 @@ public class HandlerService    extends WearableListenerService
     private  static  final  String PATH="/heartrate";
 
 
-
+    private  static  int prevHeartRate=0;
     int mStartMode;       // indicates how to behave if the service is killed
 
     boolean mAllowRebind; // indicates whether onRebind should be used
@@ -81,22 +79,34 @@ public class HandlerService    extends WearableListenerService
                                     Log.v("myTag", "Message path received on watch is: " + messageEvent.getPath());
                                     Log.v("myTag", "Message received on watch is: " + message);
 
-                                    NotificationCompat.Builder builder =
-                                            new NotificationCompat.Builder(getApplicationContext())
-                                                    .setSmallIcon(R.drawable.cast_ic_notification_0)
-                                                    .setContentTitle("Your Heart Rate")
-                                                    .setContentText(message);
+                                    int heartRate = Math.abs(Integer.parseInt(message));
 
-                                    Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                                    builder.setSound(alarmSound);
-                                    int NOTIFICATION_ID = 12345;
 
-                                    Intent targetIntent = new Intent(getApplicationContext(), MainActivity.class);
-                                    PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, targetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                                    builder.setContentIntent(contentIntent);
-                                    NotificationManager nManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                                    nManager.notify(NOTIFICATION_ID, builder.build());
+                                    int gap = Math.abs(Math.abs(prevHeartRate) - heartRate);
 
+                                    if (gap >= 10) {
+
+                                        prevHeartRate = heartRate;
+
+                                        NotificationCompat.Builder builder =
+                                                new NotificationCompat.Builder(getApplicationContext())
+                                                        .setSmallIcon(R.mipmap.ic_stat_ic_sensor_heart)
+                                                        .setContentTitle("Your Heart Rate changed !!!")
+                                                        .setContentText(message);
+
+                                        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                                        builder.setSound(alarmSound);
+                                        int NOTIFICATION_ID = 12345;
+
+                                        Intent targetIntent = new Intent(getApplicationContext(), MainActivity.class);
+                                        PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, targetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                                        builder.setContentIntent(contentIntent);
+                                        NotificationManager nManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                                        nManager.notify(NOTIFICATION_ID, builder.build());
+                                    } else {
+                                        prevHeartRate=heartRate;
+
+                                    }
                                     //   int heartRate =GetSensorData();
 
 

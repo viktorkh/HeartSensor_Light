@@ -28,6 +28,9 @@ public class MainActivity extends Activity {
 
     public void onNoBtn(View view) {
 
+        WearService ws= new WearService();
+
+        ws.CancelSensorListener();
 
 
         finish();

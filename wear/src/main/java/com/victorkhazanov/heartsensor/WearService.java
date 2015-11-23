@@ -167,6 +167,20 @@ public class WearService extends WearableListenerService implements SensorEventL
         mSensorManager.registerListener(this, this.mHeartRateSensor, 3);
     }
 
+    public void CancelSensorListener(){
+
+        if (mSensorManager != null) {
+            mSensorManager.unregisterListener(this);
+        }
+
+
+        if (mHeartRateSensor != null) {
+            mHeartRateSensor = null;
+
+        }
+    }
+
+
 
 }
 
